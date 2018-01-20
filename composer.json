@@ -1,7 +1,7 @@
 {
     "name": "recca0120/twsms",
-    "description": "twsms client",
-    "keywords": ["twsms", "sms"],
+    "description": "台灣簡訊 twsms api client",
+    "keywords": ["twsms", "sms", "taiwan", "laravel", "notification"],
     "license": "MIT",
     "authors": [
         {

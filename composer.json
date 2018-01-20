@@ -45,7 +45,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Recca0120\\Every8d\\Every8dServiceProvider"
+                "Recca0120\\TwSMS\\TwSMSServiceProvider"
             ]
         }
     }

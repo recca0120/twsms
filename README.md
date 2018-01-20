@@ -142,7 +142,7 @@ $password = 'xxx';
 
 $client = new Client(userId, $password);
 
-var_dump($client->query(['checkpoint' => 'Y'])); // 取得額度
+var_dump($client->credit()); // 取得額度
 var_dump($client->send([
     'to' => '09xxxxxxxx',
     'text' => 'test message',

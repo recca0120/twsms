@@ -106,11 +106,7 @@ class ClientTest extends TestCase
             </smsResp>'
         );
 
-        $this->assertSame([
-            'code' => '00000',
-            'text' => 'Success',
-            'point' => '6',
-        ], $client->query($params));
+        $this->assertSame('6', $client->credit());
     }
 
     public function testSend()

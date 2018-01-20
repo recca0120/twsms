@@ -4,7 +4,6 @@ namespace Recca0120\TwSMS;
 
 use Carbon\Carbon;
 use DomainException;
-use Illuminate\Support\Arr;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Http\Discovery\HttpClientDiscovery;
@@ -64,6 +63,18 @@ class Client
     }
 
     /**
+     * credit.
+     */
+    public function credit()
+    {
+        $response = $this->query([
+            'checkpoint' => 'Y',
+        ]);
+
+        return $response['point'];
+    }
+
+    /**
      * query.
      *
      * @param array $params
@@ -84,10 +95,7 @@ class Client
         $response = $this->parseResponse($response);
 
         if ($this->isValidResponse($response) === false) {
-            throw new DomainException(
-                empty($response['text']) === false ? $response['text'] : 'Unknown',
-                500
-            );
+            throw new DomainException($this->getErrorMessage($response), 500);
         }
 
         return $response;

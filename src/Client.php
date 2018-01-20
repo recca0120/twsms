@@ -64,6 +64,8 @@ class Client
 
     /**
      * credit.
+     *
+     * @return int
      */
     public function credit()
     {

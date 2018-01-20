@@ -65,7 +65,7 @@ class ClientTest extends TestCase
         ], $client->query($params));
     }
 
-    public function testQueryCheckpoint()
+    public function testCredit()
     {
         $client = new Client(
             $username = 'foo',

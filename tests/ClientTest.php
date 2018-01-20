@@ -169,6 +169,7 @@ class ClientTest extends TestCase
     /**
      * @expectedException DomainException
      * @expectedExceptionCode 500
+     * @expectedExceptionMessage 手機號碼格式錯誤
      */
     public function testSendFail()
     {

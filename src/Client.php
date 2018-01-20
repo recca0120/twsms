@@ -4,6 +4,7 @@ namespace Recca0120\TwSMS;
 
 use Carbon\Carbon;
 use DomainException;
+use Illuminate\Support\Arr;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Http\Discovery\HttpClientDiscovery;
@@ -116,10 +117,7 @@ class Client
         $response = $this->parseResponse($response);
 
         if ($this->isValidResponse($response) === false) {
-            throw new DomainException(
-                empty($response['text']) === false ? $response['text'] : 'Unknown',
-                500
-            );
+            throw new DomainException($this->getErrorMessage($response), 500);
         }
 
         return $response;
@@ -219,5 +217,45 @@ class Client
         }
 
         return $result;
+    }
+
+    /**
+     * getErrorMessage.
+     *
+     * @param array $response
+     */
+    protected function getErrorMessage($response)
+    {
+        $messages = [
+            '00000' => '完成',
+            '00001' => '狀態尚未回復',
+            '00010' => '帳號或密碼錯誤',
+            '00020' => '通數不足',
+            '00030' => 'IP 無使用權限',
+            '00040' => '帳號已停用',
+            '00050' => 'sendtime 格式錯誤',
+            '00060' => 'expirytime 格式錯誤',
+            '00070' => 'popup 格式錯誤',
+            '00080' => 'mo 格式錯誤',
+            '00090' => 'longsms 格式錯誤',
+            '00100' => '手機號碼格式錯誤',
+            '00110' => '沒有簡訊內容',
+            '00120' => '長簡訊不支援國際門號',
+            '00130' => '簡訊內容超過長度',
+            '00140' => 'drurl 格式錯誤',
+            '00150' => 'sendtime 預約的時間已經超過',
+            '00300' => '找不到 msgid',
+            '00310' => '預約尚未送出',
+            '00400' => '找不到 snumber 辨識碼',
+            '00410' => '沒有任何 mo 資料',
+            '99998' => '資料處理異常，請重新發送',
+            '99999' => '系統錯誤，請通知系統廠商',
+        ];
+
+        if (isset($messages[$response['code']]) === true) {
+            return $messages[$response['code']];
+        }
+
+        return empty($response['text']) === false ? $response['text'] : 'Unknown';
     }
 }

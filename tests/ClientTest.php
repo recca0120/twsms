@@ -106,7 +106,7 @@ class ClientTest extends TestCase
             </smsResp>'
         );
 
-        $this->assertSame('6', $client->credit());
+        $this->assertSame(6, $client->credit());
     }
 
     public function testSend()

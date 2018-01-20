@@ -73,7 +73,7 @@ class Client
             'checkpoint' => 'Y',
         ]);
 
-        return $response['point'];
+        return (int) $response['point'];
     }
 
     /**

@@ -6,8 +6,6 @@ use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Recca0120\TwSMS\TwSMSChannel;
 use Recca0120\TwSMS\TwSMSMessage;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Notifications\Notification;
 
 class TwSMSChannelTest extends TestCase
 {
@@ -79,43 +77,5 @@ class TwSMSChannelTest extends TestCase
                 return false;
             })
         );
-    }
-}
-
-if (class_exists(Notification::class) === true) {
-    class TestNotifiable
-    {
-        use Notifiable;
-
-        protected $resolver;
-
-        public function __construct($resolver)
-        {
-            $this->resolver = $resolver;
-        }
-
-        public function routeNotificationForTwSMS()
-        {
-            $resolver = $this->resolver;
-
-            return $resolver();
-        }
-    }
-
-    class TestNotification extends Notification
-    {
-        protected $resolver;
-
-        public function __construct($resolver)
-        {
-            $this->resolver = $resolver;
-        }
-
-        public function toTwSMS()
-        {
-            $resolver = $this->resolver;
-
-            return $resolver();
-        }
     }
 }

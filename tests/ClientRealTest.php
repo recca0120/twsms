@@ -3,8 +3,8 @@
 namespace Recca0120\TwSMS\Tests;
 
 use Mockery as m;
-use Recca0120\TwSMS\Client;
 use PHPUnit\Framework\TestCase;
+use Recca0120\TwSMS\Client;
 
 class ClientRealTest extends TestCase
 {
